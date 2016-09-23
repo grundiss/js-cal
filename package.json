@@ -1,0 +1,19 @@
+{
+  "name": "js-cal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grundiss/js-cal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grundiss/js-cal/issues"
+  },
+  "homepage": "https://github.com/grundiss/js-cal#readme"
+}
