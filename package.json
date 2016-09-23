@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/grundiss/js-cal/issues"
   },
-  "homepage": "https://github.com/grundiss/js-cal#readme"
+  "homepage": "https://github.com/grundiss/js-cal#readme",
+  "dependencies": {
+    "moment": "^2.15.1"
+  }
 }
