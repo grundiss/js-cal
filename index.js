@@ -2,53 +2,34 @@
 
 var moment = require('moment');
 
-function calendar(start, end) {
-    var years = [];
-    var workingMoment = start.clone().day(1);
-
-    years: do {
-        var year = [workingMoment.year()];
-
-        months: do {
-            var month = [workingMoment.month()];
-
-            weeks: do {
-                var week = [workingMoment.week()];
-
-                days: for(var i = 0; i < 7; i++) {
-                    try {
-                        if(workingMoment.isBefore(start)) {
-                            week.push(null);
-                        } else if(workingMoment.isAfter(end)) {
-                            throw 1;
-                        } else {
-                            week.push(workingMoment.date());
-                        }
-                    } catch (_) {
-                        break days;
-                    } finally {
-                        workingMoment.add(1, 'day');
-                    }
-                }
-
-                month.push(week);
-            } while (workingMoment.week() == end.week());
-
-            year.push(month);
-        } while (workingMoment.month() <= end.month());
-
-        years.push(year);
-    } while (workingMoment.year() <= end.year());
-
-    return years;
+function calendar(mondayFirst) {
+	return function(year, month) {
+	    var m = moment().year(year).month(month).date(1);
+    	var weeks = [];
+    
+	    do {
+    		var week = [];
+			weeks.push(week);    	
+    	
+	    	for(var i = 0; i < 7; i++) {
+	    		var dow = m.day();
+	    		
+	    		if(mondayFirst) {
+	    			dow = m.day() - 1;			
+	    			if(dow < 0) dow = 6;
+	    		}
+    		
+	    		if(dow !== i) {
+    				week.push(null);
+    			} else {
+    				week.push(m.month() == month ? m.date() : null);
+    				m.add(1, 'days')
+	    		}
+    		}
+	    } while(m.month() === month)
+    	
+	    return weeks;
+	}
 }
 
-console.log(
-    JSON.stringify(
-        calendar(moment(), moment().year(2017).month(6).date(11)),
-        null,
-        4
-    )
-);
-
-//module.export = calendar;
+module.exports = calendar;
